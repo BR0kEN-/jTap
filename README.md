@@ -46,4 +46,4 @@ Changelog
 
 Демонстрация
 -------
-http://firstvector.org/simpleTooltip
+http://firstvector.org/jTap
