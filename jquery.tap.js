@@ -3,29 +3,24 @@
 *	Visit our website: http://firstvector.org/
 *	See information about our team: http://firstvector.org/humans.txt
 *
-*   @author BR0kEN, Firstvector.org
-*   @depend jQuery
-*   @update August 21, 2013 by @author
-*
-*   Custom "tap" event for touch devices.
+*	@author BR0kEN
+*	@depend jQuery
+*	@version 0.2.0
+*	@update August 22, 2013
 */
 
 (function($){
 	'use strict';
 
-	var tap = {};
-
-	tap = {
-		capable: 'ontouchstart' in document,
-		destroy: {start: null, end: null},
-		start: tap.capable ? 'touchstart' : 'mousedown',
-		end: tap.capable ? 'touchend' : 'mouseup',
-		target: null,
-		state: false,
-		time: 0,
-		X: 0,
-		Y: 0,
-		e: null
+	/**
+	*	@param (bool) enable - check the availability of touch events in browser.
+	*	@param (object) tap - extending object, which contain event properties.
+	*		- (string) start - start event depending of @enable.
+	*		- (string) end - start event depending of @enable.
+	*/
+	var enable = 'ontouchstart' in document, tap = {
+		start: enable ? 'touchstart' : 'mousedown',
+		end: enable ? 'touchend' : 'mouseup'
 	};
 
 	$.fn.tap = function(fn){
@@ -36,38 +31,47 @@
 		setup: function(){
 			$(this).bind(tap.start +' '+ tap.end, function(e){
 
-				tap.e = tap.capable ? e.originalEvent.changedTouches[0] : e;
+				/**
+				*	Adding jQuery event to @tap object depending of @enable.
+				*
+				*	Attention: value of this property will change two time
+				*	per event: first time - on start, second - on end.
+				*/
+				tap.E = enable ? e.originalEvent.changedTouches[0] : e;
 
-			}).bind(tap.start, function tapstart(e){
+			}).bind(tap.start, function(e){
 
-				tap.destroy.start = tapstart;
+				/**
+				*	Function stop if event is simulate by mouse.
+				*/
+				if (e.which && e.which !== 1) return;
 
-				if (e.which && e.which !== 1) return false;
-				else {
-					tap.state = true;
-					tap.target = e.target;
-					tap.time = new Date().getTime();
-					tap.X = tap.e.pageX;
-					tap.Y = tap.e.pageY;
+				/**
+				*	Extend @tap object from event properties of initial phase.
+				*/
+				tap.target = e.target;
+				tap.time = new Date().getTime();
+				tap.X = tap.E.pageX;
+				tap.Y = tap.E.pageY;
 
-					return true;
-				}
+			}).bind(tap.end, function(e){
 
-			}).bind(tap.end, function tapend(e){
-
-				tap.destroy.end = tapend;
-
-				if (tap.target == e.target && tap.state && ((new Date().getTime() - tap.time) < 750) && (tap.X == tap.e.pageX && tap.Y == tap.e.pageY)) {
+				/**
+				*	Compare property values of initial phase with properties
+				*	of this, final, phase. Execute event if values will be
+				*	within the acceptable and set new properties for event.
+				*/
+				if (tap.target == e.target && ((new Date().getTime() - tap.time) < 750) && (tap.X == tap.E.pageX && tap.Y == tap.E.pageY)) {
 					e.type = 'tap';
 
 					$.event.dispatch.call(this, e, {
 						position: {
-			  				x: tap.e.screenX,
-			  				y: tap.e.screenY
+			  				x: tap.E.screenX,
+			  				y: tap.E.screenY
 						},
 						offset: {
-							x: tap.capable ? tap.e.pageX - tap.e.target.offsetLeft : e.offsetX,
-							y: tap.capable ? tap.e.pageY - tap.e.target.offsetTop : e.offsetY
+							x: enable ? tap.E.pageX - tap.E.target.offsetLeft : e.offsetX,
+							y: enable ? tap.E.pageY - tap.E.target.offsetTop : e.offsetY
 						},
 						time: new Date().getTime(),
 						target: e.target
@@ -77,8 +81,11 @@
 			});
 		},
 
+		/**
+		*	Disassembling event.
+		*/
 		remove: function(){
-			$(this).unbind(tap.start, tap.destroy.start).unbind(tap.end, tap.destroy.end);
+			$(this).unbind(tap.start, false).unbind(tap.end, false);
 		}
 	};
 })(jQuery);
