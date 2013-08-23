@@ -38,7 +38,7 @@ $('selector')[clickEvent](handler);
 Changelog
 -------
 **Версия [0.2.0](https://github.com/BR0kEN-/jTap/tree/v0.2.0)**:
-- дебютная версия.
+- дебютная публичная версия.
 
 Лицензия
 -------
