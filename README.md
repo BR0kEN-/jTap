@@ -42,7 +42,7 @@ Changelog
 
 Licence
 -------
-**jTap** under the [MIT license](http://opensource.org/licenses/mit-license.html).
+**jTap** is licensed under the[MIT license](http://opensource.org/licenses/mit-license.html).
 
 Demonstration
 -------
