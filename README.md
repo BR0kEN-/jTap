@@ -5,7 +5,7 @@ jTap
 
 Those who are faced with adaptation of web-based applications for mobile devices knows that the event "click" 
 is triggered with a delay of 300ms, observe which not very pleasant. In addition, click on non-delegated place of 
-document is will not work. To solve these problems and was designed by **jQuery Tap Event**.
+document will not work. To solve these problems and was designed by **jQuery Tap Event**.
 
 Usage
 -------
