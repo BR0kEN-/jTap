@@ -37,8 +37,8 @@ on a device with a touch screen or on a desktop computer - the handler will be e
 
 Changelog
 -------
-**Version [0.2.3](https://github.com/BR0kEN-/jTap/tree/v0.2.3)**:
-- first public version
+**Version [0.2.4](https://github.com/BR0kEN-/jTap/tree/v0.2.3), August 22, 2013**:
+- first public version.
 
 Licence
 -------
