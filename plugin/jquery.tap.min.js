@@ -5,7 +5,7 @@
 *
 *	@author BR0kEN
 *	@depend jQuery
-*	@version 0.2.0
+*	@version 0.2.4
 *	@update August 22, 2013
 */
 
