@@ -83,7 +83,23 @@ section {
 	margin:40px auto;
 	background:#eee;
 	height:300px;
-	color:#000;
-	font:normal 20px/300px Arial;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	user-select:none;
+}
+section div {
+	width:50%;
+	height:180px;
+	padding-top:120px;
 	text-align:center;
+	font:normal 18px/28px Arial;
+}
+section .right {
+	color:#fff;
+	float:right;
+	background:#ccc;
+}
+section .left {
+	color:#000;
+	float:left;
 }
