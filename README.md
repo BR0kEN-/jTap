@@ -44,6 +44,8 @@ Licence
 -------
 **jTap** is licensed under the [MIT license](http://opensource.org/licenses/mit-license.html).
 
-Demonstration
+Links
 -------
-http://firstvector.org/jTap
+- **Demonstration:** http://firstvector.org/jTap
+- **Plugin page:** http://plugins.jquery.com/jTap/
+- **Presentational publication (ru):** http://habrahabr.ru/post/191078/
