@@ -5,8 +5,8 @@
 *
 *	@author BR0kEN
 *	@depend jQuery
-*	@version 0.2.0
-*	@update August 22, 2013
+*	@version 0.2.5
+*	@update October 27, 2013
 */
 
 (function($){
@@ -24,7 +24,7 @@
 	};
 
 	$.fn.tap = function(fn){
-		return fn ? this.bind('tap', fn) : this.trigger('tap');
+		return this[fn ? 'bind' : 'trigger']('tap', fn);
 	};
 
 	$.event.special.tap = {
@@ -63,19 +63,10 @@
 				*/
 				if (tap.target == e.target && ((new Date().getTime() - tap.time) < 750) && (tap.X == tap.E.pageX && tap.Y == tap.E.pageY)) {
 					e.type = 'tap';
+					e.pageX = tap.E.pageX;
+					e.pageY = tap.E.pageY;
 
-					$.event.dispatch.call(this, e, {
-						position: {
-			  				x: tap.E.screenX,
-			  				y: tap.E.screenY
-						},
-						offset: {
-							x: enable ? tap.E.pageX - tap.E.target.offsetLeft : e.offsetX,
-							y: enable ? tap.E.pageY - tap.E.target.offsetTop : e.offsetY
-						},
-						time: new Date().getTime(),
-						target: e.target
-					});
+					$.event.dispatch.call(this, e);
 				}
 
 			});
