@@ -1,49 +1,59 @@
 jTap
 =============
 
-**jTap** - дополнительное событие для jQuery обрабатывающее прикосновение к экрану на сенсорных устройствах.
+**jTap** - additional event for jQuery processing touching to screen on touch devices.
 
-Те, кто сталкивался с адаптацией веб-приложений под мобильные устройства, знают что событие "click" срабатывает с
-задержкой в 300ms, наблюдать которую не совсем приятно. Помимо этого, клик по не дерегированной области документа не
-будет зафиксирован. Для решения этих задач и был разработан **jQuery Tap Event**.
+Those who are faced with adaptation of web-based applications for mobile devices knows that the event "click"
+is triggered with a delay of 300ms, observe which not very pleasant. In addition, click on non-delegated place of
+document will not work. To solve these problems and was designed by **jQuery Tap Event**.
 
-Использование
+Usage
 -------
 
-Подключите файл плагина на странице:
+Include the plugin file on the page:
 ```html
 <script src="jquery.tap.min.js"></script>
 ```
-и затем, после инициализации, можно устанавливать обработчики следующим образом:
+and then, after initialization, can set handler as follows:
 ```javascript
 $('selector').tap(handler);
 $('selector').on('tap', handler);
 ```
 
-**Заметка**: при использовании метода "tap", можно проверить его сщуествование таким образом:
+**Note**: if using "tap" method, you can check the existence of him:
 ```javascript
 $.isFunction($.fn.tap);
 ```
-и даже обезопасить себя поступив так:
+and even protect themselves in so doing:
 ```javascript
 var clickEvent = $.isFunction($.fn.tap) ? 'tap' : 'click';
 
 $('selector')[clickEvent](handler);
 ```
-Но, конечно же, лучше просто использовать делегирование события при помощи стандартного метода `.on('tap', handler)`
+But, of course, better to just use delegation event by means of jQuery method `.on('tap', handler)`
 
-**Заметка**: Примечательная особенность плагина - универсальность. Не важно где вы используете событие "tap":
-на девайсе с сенсорным экраном или на настольном компьютере - обработчик будет выполнятся одинаково повсюду.
+**Note**: A noteworthy feature of plugin is a versatility. No matter where you are using the "tap" event :
+on a device with a touch screen or on a desktop computer - the handler will be executed disparately.
 
 Changelog
 -------
-**Версия [0.2.0](https://github.com/BR0kEN-/jTap/tree/v0.2.0)**:
-- дебютная версия.
+**Version [0.2.5](https://github.com/BR0kEN-/jTap/tree/v0.2.5)**, November 17, 2013:
+- fixed an [issue #1](https://github.com/BR0kEN-/jTap/issues/1): method preventdefault doesn't worked,
+because the tap event constructed by mousedown/mouseup or touchstart/touchend events and they can not to be prevented.
 
-Лицензия
--------
-**jTap** находится под действием [MIT license](http://opensource.org/licenses/mit-license.html).
+**Version [0.2.4](https://github.com/BR0kEN-/jTap/tree/v0.2.4)**, August 22, 2013:
+- first public version.
 
-Демонстрация
+Thank you
 -------
-http://firstvector.org/simpleTooltip
+- [Vasily Asakasinsky (asakasinsky)](https://github.com/asakasinsky), for the [bug report #1](https://github.com/BR0kEN-/simpleTooltip/issues/1) - *November 17, 2013*.
+
+Licence
+-------
+**jTap** is licensed under the [MIT license](http://opensource.org/licenses/mit-license.html).
+
+Links
+-------
+- **Demonstration:** http://firstvector.org/jTap
+- **Plugin page:** http://plugins.jquery.com/jTap/
+- **Presentational publication (ru):** http://habrahabr.ru/post/191078/
