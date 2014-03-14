@@ -37,6 +37,10 @@ on a device with a touch screen or on a desktop computer - the handler will be e
 
 Changelog
 -------
+**Version [0.2.6](https://github.com/BR0kEN-/jTap/tree/v0.2.6)**, March 14, 2014:
+- made the code refactoring;
+- updated the license and demonstration.
+
 **Version [0.2.5](https://github.com/BR0kEN-/jTap/tree/v0.2.5)**, November 17, 2013:
 - fixed an [issue #1](https://github.com/BR0kEN-/jTap/issues/1): method preventdefault doesn't worked,
 because the tap event constructed by mousedown/mouseup or touchstart/touchend events and they can not to be prevented.
