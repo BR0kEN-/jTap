@@ -1,92 +1,88 @@
 /**
- *	Follow us on Twitter: https://twitter.com/firstvector
- *	Visit our website: http://firstvector.org/
- *	See information about our team: http://firstvector.org/humans.txt
+ *  Follow us on Twitter: https://twitter.com/firstvector
+ *  Visit our website: http://firstvector.org/
+ *  See information about our team: http://firstvector.org/humans.txt
  *
- *	@author BR0kEN
- *	@depend jQuery
- *	@version 0.2.5
- *	@update November 17, 2013
+ *  @author Sergey Bondarenko (BR0kEN), Propeople Ukraine
+ *  @update March 14, 2014
+ *  @version 0.2.6
  */
+(function($, name) {
+  'use strict';
 
-;(function($){
-	'use strict';
+  /**
+   *  @param (bool) isTap - check the availability of touch events in browser.
+   *  @param (object) ev - extending object, which contain event properties.
+   *    - (string) start - start event depending of @isTap.
+   *    - (string) end - start event depending of @isTap.
+   */
+  var isTap = 'ontouchstart' in document,
+      ev = {
+        start: isTap ? 'touchstart' : 'mousedown',
+        end: isTap ? 'touchend' : 'mouseup'
+      };
 
-	/**
-	 *	@param (bool) enable - check the availability of touch events in browser.
-	 *	@param (object) tap - extending object, which contain event properties.
-	 *		- (string) start - start event depending of @enable.
-	 *		- (string) end - start event depending of @enable.
-	 */
-	var enable = 'ontouchstart' in document, tap = {
-		start: enable ? 'touchstart' : 'mousedown',
-		end: enable ? 'touchend' : 'mouseup'
-	};
+  $.fn[name] = function(fn) {
+    return this[fn ? 'bind' : 'trigger'](name, fn);
+  };
 
-	$.fn.tap = function(fn){
-		return this[fn ? 'bind' : 'trigger']('tap', fn);
-	};
+  $.event.special[name] = {
+    setup: function(){
+      $(this).bind(ev.start + ' ' + ev.end, function(e) {
+        /**
+         *  Adding jQuery event to @ev object depending of @isTap.
+         *
+         *  Attention: value of this property will change two time
+         *  per event: first time - on start, second - on end.
+         */
+        ev.E = isTap ? e.originalEvent.changedTouches[0] : e;
+      }).bind(ev.start, function(e) {
+        /**
+         *  Function stop if event is simulate by mouse.
+         */
+        if (e.which && e.which !== 1) {
+          return;
+        }
+        /**
+         *  Extend @ev object from event properties of initial phase.
+         */
+        ev.target = e.target;
+        ev.time = new Date().getTime();
+        ev.X = ev.E.pageX;
+        ev.Y = ev.E.pageY;
+      }).bind(ev.end, function(e) {
+        /**
+         *  Compare property values of initial phase with properties
+         *  of this, final, phase. Execute event if values will be
+         *  within the acceptable and set new properties for event.
+         */
+        if (
+          ev.target == e.target &&
+          ((new Date().getTime() - ev.time) < 750) &&
+          (ev.X == ev.E.pageX && ev.Y == ev.E.pageY)
+        ) {
+          /**
+           * @since 0.2.5: added the preventDefault
+           */
+          var t = $(this);
+          e.preventDefault = function() {
+            t.bind('click', false);
+          };
 
-	$.event.special.tap = {
-		setup: function(){
-			$(this).bind(tap.start +' '+ tap.end, function(e){
+          e.type = name;
+          e.pageX = ev.E.pageX;
+          e.pageY = ev.E.pageY;
 
-				/**
-				 *	Adding jQuery event to @tap object depending of @enable.
-				 *
-				 *	Attention: value of this property will change two time
-				 *	per event: first time - on start, second - on end.
-				 */
-				tap.E = enable ? e.originalEvent.changedTouches[0] : e;
+          $.event.dispatch.call(this, e);
+        }
+      });
+    },
 
-			}).bind(tap.start, function(e){
-
-				/**
-				 *	Function stop if event is simulate by mouse.
-				 */
-				if (e.which && e.which !== 1) return;
-
-				/**
-				 *	Extend @tap object from event properties of initial phase.
-				 */
-				tap.target = e.target;
-				tap.time = new Date().getTime();
-				tap.X = tap.E.pageX;
-				tap.Y = tap.E.pageY;
-
-			}).bind(tap.end, function(e){
-
-				/**
-				 *	Compare property values of initial phase with properties
-				 *	of this, final, phase. Execute event if values will be
-				 *	within the acceptable and set new properties for event.
-				 */
-				if (tap.target == e.target && ((new Date().getTime() - tap.time) < 750) && (tap.X == tap.E.pageX && tap.Y == tap.E.pageY)) {
-
-					/**
-					 * @since 0.2.5: added the preventDefault
-					 */
-					var t = $(this);
-
-					e.preventDefault = function(){
-						t.bind('click', false);
-					};
-
-					e.type = 'tap';
-					e.pageX = tap.E.pageX;
-					e.pageY = tap.E.pageY;
-
-					$.event.dispatch.call(this, e);
-				}
-
-			});
-		},
-
-		/**
-		 *	Disassembling event.
-		 */
-		remove: function(){
-			$(this).unbind(tap.start, false).unbind(tap.end, false);
-		}
-	};
-})(jQuery);
+    /**
+     *  Disassembling event.
+     */
+    remove: function() {
+      $(this).unbind(ev.start, false).unbind(ev.end, false);
+    }
+  };
+})(jQuery, 'tap');
