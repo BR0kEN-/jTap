@@ -37,6 +37,9 @@ on a device with a touch screen or on a desktop computer - the handler will be e
 
 Changelog
 -------
+**Version [0.2.7](https://github.com/BR0kEN-/jTap/tree/v0.2.7)**, March 17, 2014:
+- added support of jQuery >= 1.4.x
+
 **Version [0.2.6](https://github.com/BR0kEN-/jTap/tree/v0.2.6)**, March 14, 2014:
 - made the code refactoring;
 - updated the license and demonstration.

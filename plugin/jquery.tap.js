@@ -72,8 +72,10 @@
           e.type = name;
           e.pageX = ev.E.pageX;
           e.pageY = ev.E.pageY;
-
-          $.event.dispatch.call(this, e);
+          /**
+           * @since 0.2.7: added support of the jQuery 1.4
+           */
+          $.event.trigger(name);
         }
       });
     },
