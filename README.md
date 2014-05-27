@@ -12,7 +12,7 @@ Usage
 
 Include the plugin file on the page:
 ```html
-<script src="jquery.tap.min.js"></script>
+<script src="jquery.tap.js"></script>
 ```
 and then, after initialization, can set handler as follows:
 ```javascript
@@ -37,6 +37,10 @@ on a device with a touch screen or on a desktop computer - the handler will be e
 
 Changelog
 -------
+**Version [0.2.8](https://github.com/BR0kEN-/jTap/tree/v0.2.8)**, May 27, 2014:
+- was removed the checking of "ontouchstart" in document, because newest versions of browsers contains this property in document for any format of the computer;
+- the library was oriented for jQuery 1.6 or higher.
+
 **Version [0.2.7](https://github.com/BR0kEN-/jTap/tree/v0.2.7)**, March 17, 2014:
 - added support of jQuery >= 1.4.x
 

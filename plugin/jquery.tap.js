@@ -1,90 +1,78 @@
 /**
- *  Follow us on Twitter: https://twitter.com/firstvector
- *  Visit our website: http://firstvector.org/
- *  See information about our team: http://firstvector.org/humans.txt
- *
- *  @author Sergey Bondarenko (BR0kEN), Propeople Ukraine
- *  @update March 14, 2014
- *  @version 0.2.6
+ * Author: Sergey Bondarenko (BR0kEN)
+ * E-mail: broken@propeople.com.ua
+ * Github: https://github.com/BR0kEN-/jTap
+ * Updated: May 27, 2014
+ * Version: 0.2.8
  */
-(function($, name) {
+(function($, _) {
   'use strict';
 
   /**
-   *  @param (bool) isTap - check the availability of touch events in browser.
-   *  @param (object) ev - extending object, which contain event properties.
-   *    - (string) start - start event depending of @isTap.
-   *    - (string) end - start event depending of @isTap.
+   * @param (object) ev - extending object, which contain event properties.
+   *  - (string) start - start event depending of @isTap.
+   *  - (string) end - start event depending of @isTap.
    */
-  var isTap = 'ontouchstart' in document,
-      ev = {
-        start: isTap ? 'touchstart' : 'mousedown',
-        end: isTap ? 'touchend' : 'mouseup'
-      };
-
-  $.fn[name] = function(fn) {
-    return this[fn ? 'bind' : 'trigger'](name, fn);
+  var ev = {
+    start: 'touchstart mousedown',
+    end: 'touchend mouseup'
   };
 
-  $.event.special[name] = {
-    setup: function(){
-      $(this).bind(ev.start + ' ' + ev.end, function(e) {
+  $.event.special[_] = {
+    setup: function() {
+      $(this).off('click').on(ev.start + ' ' + ev.end, function(e) {
         /**
-         *  Adding jQuery event to @ev object depending of @isTap.
+         * Adding jQuery event to @ev object depending of @isTap.
          *
-         *  Attention: value of this property will change two time
-         *  per event: first time - on start, second - on end.
+         * Attention: value of this property will change two time
+         * per event: first time - on start, second - on end.
          */
-        ev.E = isTap ? e.originalEvent.changedTouches[0] : e;
-      }).bind(ev.start, function(e) {
+        ev.E = e.originalEvent.changedTouches ? e.originalEvent.changedTouches[0] : e;
+      }).on(ev.start, function(e) {
         /**
-         *  Function stop if event is simulate by mouse.
+         * Function stop if event is simulate by mouse.
          */
         if (e.which && e.which !== 1) {
           return;
         }
+
         /**
-         *  Extend @ev object from event properties of initial phase.
+         * Extend @ev object from event properties of initial phase.
          */
         ev.target = e.target;
         ev.time = new Date().getTime();
         ev.X = ev.E.pageX;
         ev.Y = ev.E.pageY;
-      }).bind(ev.end, function(e) {
+      }).on(ev.end, function(e) {
         /**
-         *  Compare property values of initial phase with properties
-         *  of this, final, phase. Execute event if values will be
-         *  within the acceptable and set new properties for event.
+         * Compare property values of initial phase with properties
+         * of this, final, phase. Execute event if values will be
+         * within the acceptable and set new properties for event.
          */
         if (
-          ev.target == e.target &&
+          ev.target === e.target &&
           ((new Date().getTime() - ev.time) < 750) &&
-          (ev.X == ev.E.pageX && ev.Y == ev.E.pageY)
+          (ev.X === ev.E.pageX && ev.Y === ev.E.pageY)
         ) {
-          /**
-           * @since 0.2.5: added the preventDefault
-           */
-          var t = $(this);
-          e.preventDefault = function() {
-            t.bind('click', false);
-          };
 
-          e.type = name;
+          e.type = _;
           e.pageX = ev.E.pageX;
           e.pageY = ev.E.pageY;
-          /**
-           * @since 0.2.7: added support of the jQuery 1.4
-           */
-          $.event.trigger(name);
+
+          $.event.dispatch.call(this, e);
         }
       });
     },
 
     /**
-     *  Disassembling event.
+     * Disassembling event.
      */
     remove: function() {
-      $(this).unbind(ev.start, false).unbind(ev.end, false);
+      $(this).off(ev.start, false).off(ev.end, false);
     }
+  };
+
+  $.fn[_] = function(fn) {
+    return this[fn ? 'on' : 'trigger'](_, fn);
   };
 })(jQuery, 'tap');
