@@ -2,8 +2,8 @@
  * Author: Sergey Bondarenko (BR0kEN)
  * E-mail: broken@propeople.com.ua
  * Github: https://github.com/BR0kEN-/jTap
- * Updated: May 27, 2014
- * Version: 0.2.8
+ * Updated: June 2, 2014
+ * Version: 0.2.9
  */
 (function($, _) {
   'use strict';
@@ -68,7 +68,7 @@
      * Disassembling event.
      */
     remove: function() {
-      $(this).off(ev.start, false).off(ev.end, false);
+      $(this).off(ev.start + ' ' + ev.end);
     }
   };
 

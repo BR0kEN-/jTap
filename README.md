@@ -37,6 +37,9 @@ on a device with a touch screen or on a desktop computer - the handler will be e
 
 Changelog
 -------
+**Version [0.2.9](https://github.com/BR0kEN-/jTap/tree/v0.2.9)**, June 2, 2014:
+- fixed an [issue #2](https://github.com/BR0kEN-/jTap/issues/2): undelegate event works incorrect.
+
 **Version [0.2.8](https://github.com/BR0kEN-/jTap/tree/v0.2.8)**, May 27, 2014:
 - was removed the checking of "ontouchstart" in document, because newest versions of browsers contains this property in document for any format of the computer;
 - the library was oriented for jQuery 1.6 or higher.
