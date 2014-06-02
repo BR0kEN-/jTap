@@ -61,6 +61,7 @@ because the tap event constructed by mousedown/mouseup or touchstart/touchend ev
 Thank you
 -------
 - [Vasily Asakasinsky (asakasinsky)](https://github.com/asakasinsky), for the [bug report #1](https://github.com/BR0kEN-/simpleTooltip/issues/1) - *November 17, 2013*.
+- [egorogl](https://github.com/egorogl), for the [bug report #2](https://github.com/BR0kEN-/simpleTooltip/issues/2) - *May 29, 2014*.
 
 Licence
 -------
