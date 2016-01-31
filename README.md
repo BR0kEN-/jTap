@@ -57,6 +57,6 @@ $('selector').on('tap', handler);
 
 ## Links
 
-- **Demonstration:** http://firstvector.org/jTap
+- **Demonstration:** http://BR0kEN-.github.io/jTap
 - **Plugin page:** http://plugins.jquery.com/jTap
 - **Presentational publication (ru):** http://habrahabr.ru/post/191078
