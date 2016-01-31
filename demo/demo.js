@@ -1,15 +1,10 @@
-(function($){
-	'use strict';
+(function($) {
+  'use strict';
 
-	var DO = function(o, e){
-		$(o).html('Event: '+ e.type +'.<br>Coordinates[x: '+ e.pageX +', y: '+ e.pageY +']');
-	};
+  var callback = function(event) {
+    $(this).html('Event: ' + event.type + '.<br>x: ' + event.pageX + ', y: ' + event.pageY);
+  };
 
-	$('.left').on('click', function(e){
-		DO(this, e);
-	});
-
-	$('.right').on('tap', function(e){
-		DO(this, e);
-	});
+  $('.left').on('click', callback);
+  $('.right').on('tap', callback);
 })(jQuery);
