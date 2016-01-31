@@ -2,7 +2,7 @@
   'use strict';
 
   var callback = function(event) {
-    $(this).html('Event: ' + event.type + '.<br>x: ' + event.pageX + ', y: ' + event.pageY);
+    $(this).html(event.type + ' (x: ' + event.pageX + ', y: ' + event.pageY + ')');
   };
 
   $('.left').on('click', callback);
