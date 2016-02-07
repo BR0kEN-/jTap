@@ -18,7 +18,7 @@
 
   nativeEvent.original = 'click';
 
-  if ('ontouchstart' in document.documentElement) {
+  if ('ontouchstart' in document) {
     nativeEvent.start = 'touchstart';
     nativeEvent.end = 'touchend';
   } else {
