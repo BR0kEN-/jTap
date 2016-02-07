@@ -2,7 +2,7 @@
   "name": "jtap",
   "main": "jquery.tap.js",
   "license": "MIT",
-  "version": "0.3.3",
+  "version": "0.3.1",
   "author": {
     "name": "Sergii Bondarenko",
     "email": "sb@firstvector.org"
