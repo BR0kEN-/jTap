@@ -22,6 +22,9 @@ $('selector').on('tap', handler);
 
 ## Changelog
 
+**Version [0.3.1](https://github.com/BR0kEN-/jTap/tree/v0.3.1)**, February 7, 2016:
+- fixed an issue when `mousedown` and `mouseup` events is triggering on mobile devices.
+
 **Version [0.3.0](https://github.com/BR0kEN-/jTap/tree/v0.3.0)**, January 31, 2016:
 - fixed an [issue #1](https://github.com/BR0kEN-/jTap/issues/1): redesigned `preventDefault` handling.
 

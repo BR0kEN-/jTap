@@ -4,17 +4,27 @@
   /**
    * Native event names for creating custom one.
    *
-   * @type {{original: string, start: string, end: string}}
+   * @type {Object}
    */
-  var nativeEvents = {
-    original: 'click',
-    start: 'touchstart mousedown',
-    end: 'touchend mouseup'
-  };
-
+  var nativeEvent = Object.create(null);
+  /**
+   * Get current time.
+   *
+   * @return {Number}
+   */
   var getTime = function() {
     return new Date().getTime();
   };
+
+  nativeEvent.original = 'click';
+
+  if ('ontouchstart' in document.documentElement) {
+    nativeEvent.start = 'touchstart';
+    nativeEvent.end = 'touchend';
+  } else {
+    nativeEvent.start = 'mousedown';
+    nativeEvent.end = 'mouseup';
+  }
 
   $.event.special[specialEventName] = {
     setup: function(data, namespaces, eventHandle) {
@@ -23,16 +33,16 @@
 
       $element
         // Remove all handlers that were set for an original event.
-        .off(nativeEvents.original)
+        .off(nativeEvent.original)
         // Prevent default actions.
-        .on(nativeEvents.original, false)
+        .on(nativeEvent.original, false)
         // Split original event by two different and collect an information
         // on every phase.
-        .on(nativeEvents.start + ' ' + nativeEvents.end, function(event) {
+        .on(nativeEvent.start + ' ' + nativeEvent.end, function(event) {
           // Handle the event system of touchscreen devices.
           eventData.event = event.originalEvent.changedTouches ? event.originalEvent.changedTouches[0] : event;
         })
-        .on(nativeEvents.start, function(event) {
+        .on(nativeEvent.start, function(event) {
           // Stop execution if an event is simulated.
           if (event.which && event.which !== 1) {
             return;
@@ -43,7 +53,7 @@
           eventData.pageY = eventData.event.pageY;
           eventData.time = getTime();
         })
-        .on(nativeEvents.end, function(event) {
+        .on(nativeEvent.end, function(event) {
           // Compare properties from two phases.
           if (
             // The target should be the same.
@@ -67,16 +77,16 @@
             if (!event.isDefaultPrevented()) {
               $element
                 // Remove prevention of default actions.
-                .off(nativeEvents.original)
+                .off(nativeEvent.original)
                 // Bring the action.
-                .trigger(nativeEvents.original);
+                .trigger(nativeEvent.original);
             }
           }
         });
     },
 
     remove: function() {
-      $(this).off(nativeEvents.start + ' ' + nativeEvents.end);
+      $(this).off(nativeEvent.start + ' ' + nativeEvent.end);
     }
   };
 
