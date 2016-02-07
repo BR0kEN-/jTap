@@ -3,6 +3,10 @@
   "main": "jquery.tap.js",
   "license": "MIT",
   "version": "0.3.1",
+  "repository": "BR0kEN-/jTap",
+  "homepage": "http://BR0kEN-.github.io/jTap",
+  "bugs": "https://github.com/BR0kEN-/jTap/issues",
+  "description": "jTap - additional event for jQuery processing touching to screen on touch devices.\n\nThose who are faced with adaptation of web-based applications for mobile devices knows that the event \"click\" is triggered with a delay of 300ms, observe which not very pleasant. In addition, click on non-delegated place of document will not work. To solve these problems and was designed by jQuery Tap Event.",
   "author": {
     "name": "Sergii Bondarenko",
     "email": "sb@firstvector.org"
@@ -10,7 +14,6 @@
   "dependencies": {
     "jquery": ">=1.6.x"
   },
-  "description": "jTap - additional event for jQuery processing touching to screen on touch devices.\n\nThose who are faced with adaptation of web-based applications for mobile devices knows that the event \"click\" is triggered with a delay of 300ms, observe which not very pleasant. In addition, click on non-delegated place of document will not work. To solve these problems and was designed by jQuery Tap Event.",
   "keywords": [
     "jquery-plugin",
     "event",
@@ -18,7 +21,5 @@
     "tap",
     "jquery",
     "jtap"
-  ],
-  "homepage": "https://github.com/BR0kEN-/jTap",
-  "bugs": "https://github.com/BR0kEN-/jTap/issues"
+  ]
 }
