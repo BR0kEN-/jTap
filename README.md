@@ -26,6 +26,10 @@ $('selector').on('tap', handler);
 
 ## Changelog
 
+**Version [0.3.2](https://github.com/BR0kEN-/jTap/tree/v0.3.2)**, February 17, 2019:
+- allow movement in a square of `10px`;
+- add the note about `.trigger('click')`.
+
 **Version [0.3.1](https://github.com/BR0kEN-/jTap/tree/v0.3.1)**, February 7, 2016:
 - fixed an issue when `mousedown` and `mouseup` events is triggering on mobile devices;
 - plugin is available as NPM package now.
@@ -58,6 +62,7 @@ $('selector').on('tap', handler);
 - [@asakasinsky](https://github.com/asakasinsky), for the [bug report #1](https://github.com/BR0kEN-/jTap/issues/1) - *November 17, 2013*.
 - [@egorogl](https://github.com/egorogl), for the [bug report #2](https://github.com/BR0kEN-/jTap/issues/2) - *May 29, 2014*.
 - [@manchunw](https://github.com/manchunw), for the [bug report #1](https://github.com/BR0kEN-/jTap/issues/1) - *January 31, 2016*.
+- [@commonpike](https://github.com/commonpike), for the issues [#7](https://github.com/BR0kEN-/jTap/issues/7) and [#8](https://github.com/BR0kEN-/jTap/issues/8) - *February 17, 2019*.
 
 ## Licence
 
