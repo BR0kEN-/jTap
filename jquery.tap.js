@@ -1,4 +1,4 @@
-(function($, specialEventName) {
+(function($, specialEventName, marginX, marginY) {
   'use strict';
 
   /**
@@ -60,11 +60,11 @@
             eventData.target === event.target &&
             // Time between first and last phases should be less than 750 ms.
             getTime() - eventData.time < 750 &&
-            // Coordinates, when event ends, should be the same as they were
-            // on start.
+            // Coordinates, when event ends, should be almost the same as
+            // they were on start.
             (
-              eventData.pageX === eventData.event.pageX &&
-              eventData.pageY === eventData.event.pageY
+              Math.abs(eventData.pageX - eventData.event.pageX) <= marginX &&
+              Math.abs(eventData.pageY - eventData.event.pageY) <= marginY
             )
           ) {
             event.type = specialEventName;
@@ -93,4 +93,4 @@
   $.fn[specialEventName] = function(fn) {
     return this[fn ? 'on' : 'trigger'](specialEventName, fn);
   };
-})(jQuery, 'tap');
+})(jQuery, 'tap', 10, 10);

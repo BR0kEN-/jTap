@@ -18,7 +18,11 @@ and set an event handler as follows:
 $('selector').on('tap', handler);
 ```
 
-**Note**: A noteworthy feature of plugin is a versatility. No matter where you are using the "tap" event: on a device with a touch screen or on a desktop computer - the handler will be executed disparately.
+## Notes
+
+- A noteworthy feature of plugin is a versatility. No matter where you use the `tap` event: on a device with a touch screen or on a desktop computer - the handler will be executed disparately.
+
+- Triggering a click manually (e.g. `$('.selector').trigger('click')`) does not trigger a tap. Likewise, triggering a tap does not trigger a click. Adapt your code to match the event expected.
 
 ## Changelog
 
